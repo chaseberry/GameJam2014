@@ -1,5 +1,7 @@
 package Mapping;
 
+import Engine.ImageLoader;
+
 import java.awt.image.BufferedImage;
 
 public class Tile {
@@ -10,11 +12,30 @@ public class Tile {
     BufferedImage img;
 
     public Tile(int x, int y, TileType.Type type){
+        this.x = x;
+        this.y = y;
+        this.type = type;
+        updateImage();
+    }
 
+    private void updateImage(){
+        String fileName = "";
+        switch(this.type){
+            case FOREST:
+                fileName = "Forest.png";
+                break;
+            case PLAIN:
+                fileName = "Plains.png";
+                break;
+            case RIVER:
+
+                break;
+        }
+        img = ImageLoader.getImage(fileName, this);
     }
 
     public BufferedImage getImage(){
-        return null;//TODO
+        return img;
     }
 
     public int getX() {
@@ -39,5 +60,6 @@ public class Tile {
 
     public void setType(TileType.Type type) {
         this.type = type;
+        updateImage();
     }
 }

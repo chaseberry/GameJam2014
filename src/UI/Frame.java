@@ -22,6 +22,7 @@ public class Frame extends JFrame implements KeyListener {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         addKeyListener(this);
+        requestFocus();
     }
 
     public void refreshFrame() {

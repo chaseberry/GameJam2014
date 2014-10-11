@@ -18,9 +18,20 @@ public class Block {
 
     private Tile[][] tileMap;
 
+    private Runnable blockGenerationRunnable = new Runnable() {
+        @Override
+        public void run() {
+            generateBlock();
+        }
+    };
+
     public Block(int seed) {
         tileMap = new Tile[Engine.numberOfSquares][Engine.numberOfSquares];
-        generateBlock();
+        if(seed > 0) {
+            new Thread(blockGenerationRunnable).start();
+        }else{
+            generateBlock();
+        }
     }
 
     public Block() {
@@ -48,10 +59,6 @@ public class Block {
                 tileMap[z][v] = new Tile(z, v, TileType.Type.PLAIN);
             }
         }
-        tileMap[8][8].setType(TileType.Type.FOREST);
-        tileMap[3][3].setType(TileType.Type.FOREST);
-        tileMap[5][8].setType(TileType.Type.FOREST);
-        tileMap[8][3].setType(TileType.Type.FOREST);
     }
 
     public BufferedImage getImage() {

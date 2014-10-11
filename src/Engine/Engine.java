@@ -40,7 +40,7 @@ public class Engine {
     public Engine() {
         keyMap = new KeyMap();
         player = new Character();
-        currentBlock = new Block();
+        currentBlock = new Block(-1);
         nextBlocks = new Block[4];
         generateNextBlocks(lastBlock);
         //These must be the last two to init
@@ -134,7 +134,7 @@ public class Engine {
                 break;
         }
         animationCount = maxAnimationMove;
-        //generateNextBlocks(lastBlock);
+        generateNextBlocks(lastBlock);
     }
 
     private void endTransition() {

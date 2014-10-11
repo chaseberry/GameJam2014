@@ -65,4 +65,8 @@ public class Character {
     public int getMana() {
         return mana;
     }
+
+    public void mouseClicked(int x, int y){
+
+    }
 }

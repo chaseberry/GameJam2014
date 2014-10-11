@@ -1,25 +1,27 @@
 package Players;
 
+import Engine.ImageLoader;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
-/**
- * Created by chase on 10/11/14.
- */
 public class Inventory {
 
     private ElementalPouch pouch;
+    private BufferedImage img;
 
-    public Inventory(){
+    public Inventory() {
         pouch = new SmallPouch();
+        img = ImageLoader.getImage("InventoryMenu.png", this);
     }
 
-    public ElementalPouch getPouch(){
+    public ElementalPouch getPouch() {
         return pouch;
     }
 
-    public BufferedImage getImage(){
-        BufferedImage pouchImage = pouch.getImage();
-        //Addstuff
-        return pouchImage;
+    public JPanel getImage() {
+        return getPouch().getImage();
     }
+
 }

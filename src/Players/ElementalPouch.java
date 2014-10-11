@@ -3,8 +3,13 @@ package Players;
 import Elements.*;
 import Engine.Engine;
 import Engine.ImageLoader;
+import UI.ElementFrame;
+import UI.ElementalPouchFrame;
 
+import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.nio.Buffer;
 import java.util.HashMap;
@@ -19,6 +24,12 @@ public class ElementalPouch {
     protected int elementCount = 0;
     private BufferedImage layerImage;
     private Element[] elementList;
+    private Element[] selectedElementList;
+
+    //**UI stuff
+    private ElementFrame[] elementFrames;
+    private ElementalPouchFrame pouchFrame;
+    //
 
     public ElementalPouch() {
         this(5);
@@ -62,24 +73,37 @@ public class ElementalPouch {
         return true;
     }
 
-    public BufferedImage getImage() {
-        BufferedImage image = new BufferedImage(200, Engine.imageSize * 7 + (/*Buffer*/5) * 7, BufferedImage.TYPE_INT_ARGB);
-        Graphics graphics = image.getGraphics();
-        for (int z = 0; z < elementList.length; z++) {
-            BufferedImage layerClone = ImageLoader.copyImage(layerImage);
-            Graphics g = layerClone.getGraphics();
-            Element element = elementList[z];
-            Color color = element.getElementColor();
-            g.setColor(color);
-            g.fillRect(0, 0, Engine.imageSize, Engine.imageSize);
-            g.drawImage(element.getImage(), 0, 0, null);
-            int count = elementMap.get(element.getElementType()) == null ? 0 : elementMap.get(element.getElementType());
-            g.setFont(new Font(null, 0, 28));
-            g.drawString(String.valueOf(count) + " " + element.getName(), 45, 30);
-            graphics.drawImage(layerClone, 0, Engine.imageSize * z + (5 * z), null);
+    public JPanel getImage() {
+        if(elementFrames == null){
+            elementFrames = new ElementFrame[7];
+            for (int z = 0; z < elementList.length; z++) {
+                Element element = elementList[z];
+                BufferedImage layerClone = ImageLoader.copyImage(layerImage);
+                Graphics g = layerClone.getGraphics();
+                g.setColor(element.getElementColor());
+                g.fillRect(0, 0, Engine.imageSize, Engine.imageSize);
+                int count = elementMap.get(element.getElementType()) == null ? 0 : elementMap.get(element.getElementType());
+                g.setFont(new Font(null, 0, 28));
+                g.drawString(String.valueOf(count), 45, 30);
+                elementFrames[z] = new ElementFrame(elementList[z], layerClone, null, null);
+            }
+        }else{
+            //Need a forloop forupdating BS;
         }
-        return image;
+        if(pouchFrame == null){
+            pouchFrame = new ElementalPouchFrame(elementFrames);
+        }
+
+
+        return pouchFrame;
     }
 
+    public boolean difuseElement(String element) {
+        if (elementMap.get(element) == null || elementMap.get(element) == 0) {
+            return false;
+        }
+        elementMap.put(element, elementMap.get(element) - 1);
+        return true;
+    }
 
 }

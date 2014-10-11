@@ -8,6 +8,7 @@ public class KeyMap {
     public static final int DOWN = 40;
     public static final int RIGHT = 39;
     public static final int MENUKEY = 69;
+    public static final int SPELLKEY = 82;
 
     private boolean up = false;
     private boolean left = false;

@@ -10,7 +10,7 @@ import java.awt.*;
 public class GlisteningCrystal extends Element {
 
     public GlisteningCrystal(int x, int y){
-        super(x, y, "Glistening Crystal", "A shining quartz crystal");
+        super(x, y, "Quartz Crystal", "A shining quartz crystal");
         img = ImageLoader.getImage("GlisteningCrystal.png", this);
     }
 

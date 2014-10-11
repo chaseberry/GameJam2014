@@ -1,5 +1,7 @@
 package Mapping;
 
+import Engine.Engine;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
@@ -17,7 +19,7 @@ public class Block {
     private Tile[][] tileMap;
 
     public Block(int seed) {
-        tileMap = new Tile[20][20];
+        tileMap = new Tile[Engine.numberOfSquares][Engine.numberOfSquares];
         generateBlock();
     }
 
@@ -27,13 +29,13 @@ public class Block {
 
     public int willCollide(double newX, double newY) {
         int x = (int) newX, y = (int) newY;
-        if (Math.floor(newY) < 0 || (y + 1) > 19 || Math.floor(newX) < 0 || (x + 1) > 19) {
+        if (Math.floor(newY) < 0 || (y + 1) > (Engine.numberOfSquares - 1) || Math.floor(newX) < 0 || (x + 1) > (Engine.numberOfSquares - 1)) {
             return SHOULDTRANSITION;
         }
         Tile[] tiles = {tileMap[x][y], tileMap[x + 1][y], tileMap[x][y + 1], tileMap[x + 1][y + 1]};
 
-        for(int z=0; z<4; z++){
-            if(tiles[z].getType()== TileType.Type.FOREST){
+        for (int z = 0; z < 4; z++) {
+            if (tiles[z].getType() == TileType.Type.FOREST) {
                 return WILLCOLLIDE;
             }
         }
@@ -41,42 +43,41 @@ public class Block {
     }
 
     private void generateBlock() {
-        for (int z = 0; z < 20; z++) {
-            for (int v = 0; v < 20; v++) {
+        for (int z = 0; z < Engine.numberOfSquares; z++) {
+            for (int v = 0; v < Engine.numberOfSquares; v++) {
                 tileMap[z][v] = new Tile(z, v, TileType.Type.PLAIN);
             }
         }
         tileMap[8][8].setType(TileType.Type.FOREST);
         tileMap[3][3].setType(TileType.Type.FOREST);
         tileMap[5][8].setType(TileType.Type.FOREST);
-        tileMap[12][3].setType(TileType.Type.FOREST);
         tileMap[8][3].setType(TileType.Type.FOREST);
-        tileMap[3][19].setType(TileType.Type.FOREST);
     }
 
     public BufferedImage getImage() {
-        BufferedImage img = new BufferedImage(640, 640, BufferedImage.TYPE_INT_ARGB);
+        int frameSize = Engine.imageSize * Engine.numberOfSquares;
+        BufferedImage img = new BufferedImage(frameSize, frameSize, BufferedImage.TYPE_INT_ARGB);
         Graphics g = img.getGraphics();
-        for (int z = 0; z < 20; z++) {
-            for (int v = 0; v < 20; v++) {
-                g.drawImage(tileMap[z][v].getImage(), 32 * z, 32 * v, null);
+        for (int z = 0; z < Engine.numberOfSquares; z++) {
+            for (int v = 0; v < Engine.numberOfSquares; v++) {
+                g.drawImage(tileMap[z][v].getImage(), Engine.imageSize * z, Engine.imageSize * v, null);
             }
         }
         return img;
     }
 
-    public int getNextBlock(double newX, double newY){
+    public int getNextBlock(double newX, double newY) {
         int x = (int) newX, y = (int) newY;
         if (Math.floor(newY) < 0) {
             return NORTH;
         }
-        if((y + 1) > 19){
+        if ((y + 1) > (Engine.numberOfSquares - 1)) {
             return SOUTH;
         }
-        if(Math.floor(newX) < 0){
+        if (Math.floor(newX) < 0) {
             return WEST;
         }
-        if((x + 1) > 19){
+        if ((x + 1) > (Engine.numberOfSquares - 1)) {
             return EAST;
         }
         return -1;

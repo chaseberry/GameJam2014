@@ -1,6 +1,8 @@
 package Players;
 
 
+import Engine.Engine;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
@@ -15,10 +17,10 @@ public class Character {
     }
 
     public BufferedImage getImage(){
-        BufferedImage img = new BufferedImage(32, 32, BufferedImage.TYPE_INT_ARGB);
+        BufferedImage img = new BufferedImage(Engine.imageSize, Engine.imageSize, BufferedImage.TYPE_INT_ARGB);
         Graphics g = img.getGraphics();
         g.setColor(Color.RED);
-        g.fillRect(0,0,32,32);
+        g.fillRect(0,0,Engine.imageSize,Engine.imageSize);
         return img;
     }
 

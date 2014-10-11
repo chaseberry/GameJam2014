@@ -16,13 +16,13 @@ public class Frame extends JFrame implements KeyListener {
     public Frame(Engine engine) {
         super();
         this.engine = engine;
-        setSize(640 + getInsets().left + getInsets().right, 640 + getInsets().top + getInsets().bottom);
         setVisible(true);
-        repaint();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         addKeyListener(this);
         requestFocus();
+        int frameSize = Engine.imageSize * Engine.numberOfSquares;
+        setSize(frameSize + getInsets().left + getInsets().right, frameSize + getInsets().top + getInsets().bottom);
     }
 
     public void refreshFrame() {

@@ -19,7 +19,10 @@ public class Engine {
     private Block currentBlock;
     private Block[] nextBlocks;
 
-    private final int maxAnimationMove = 50;
+    private final int maxAnimationMove = 25;
+    public static final int imageSize = 32;
+    public static final int numberOfSquares = 12;
+
     private int lastBlock = -1;
     private int animationCount = 0;
 
@@ -109,7 +112,7 @@ public class Engine {
                 nextBlocks[Block.SOUTH] = currentBlock;
                 currentBlock = nextBlocks[Block.NORTH];
                 lastBlock = Block.SOUTH;
-                player.setY(18.88);
+                player.setY(Engine.numberOfSquares - 1.12);
                 break;
             case Block.EAST:
                 nextBlocks[Block.WEST] = currentBlock;
@@ -121,7 +124,7 @@ public class Engine {
                 nextBlocks[Block.EAST] = currentBlock;
                 currentBlock = nextBlocks[Block.WEST];
                 lastBlock = Block.EAST;
-                player.setX(18.88);
+                player.setX(Engine.numberOfSquares - 1.12);
                 break;
             case Block.SOUTH:
                 nextBlocks[Block.NORTH] = currentBlock;
@@ -139,12 +142,13 @@ public class Engine {
     }
 
     public BufferedImage getGameImage() {
-        BufferedImage gameImage = new BufferedImage(640, 640, BufferedImage.TYPE_INT_ARGB);
+        int frameSize = Engine.numberOfSquares * Engine.imageSize;
+        BufferedImage gameImage = new BufferedImage(frameSize, frameSize, BufferedImage.TYPE_INT_ARGB);
         Graphics g = gameImage.getGraphics();
-        g.clearRect(0, 0, 640, 640);
+        g.clearRect(0, 0, frameSize, frameSize);
         if (animationCount == 0) {
             g.drawImage(currentBlock.getImage(), 0, 0, null);
-            g.drawImage(player.getImage(), (int) (32 * player.getX()), (int) (32 * player.getY()), null);
+            g.drawImage(player.getImage(), (int) (Engine.imageSize * player.getX()), (int) (Engine.imageSize * player.getY()), null);
             return gameImage;
         }
         if (lastBlock == -1) {
@@ -156,31 +160,32 @@ public class Engine {
     }
 
     private BufferedImage getTransitionImage() {
-        BufferedImage transitionImage = new BufferedImage(640, 640, BufferedImage.TYPE_INT_ARGB);
+        double frameSize = imageSize * numberOfSquares;
+        BufferedImage transitionImage = new BufferedImage((int)frameSize, (int)frameSize, BufferedImage.TYPE_INT_ARGB);
         Graphics g = transitionImage.getGraphics();
         double percentMoved = ((maxAnimationMove - animationCount) / (double)maxAnimationMove);
         switch (lastBlock) {
             case Block.NORTH://slide UP
-                int newYN = (int) ((640) * (1 - percentMoved));//640-->0
+                int newYN = (int) ((frameSize) * (1 - percentMoved));//640-->0
                 g.drawImage(currentBlock.getImage(), 0, newYN, null);
-                int oldYN = (int) ((-640) * (percentMoved));//0-->-640
+                int oldYN = (int) ((-frameSize) * (percentMoved));//0-->-640
                 g.drawImage(nextBlocks[lastBlock].getImage(), 0, oldYN, null);
                 break;
             case Block.SOUTH://slide DOWN
-                int newYS = (int) (-640 * (1 - percentMoved));//-640-->0
+                int newYS = (int) (-frameSize * (1 - percentMoved));//-640-->0
                 g.drawImage(currentBlock.getImage(), 0, newYS, null);
-                int oldYS = (int) ((640) * percentMoved);//0-->640
+                int oldYS = (int) ((frameSize) * percentMoved);//0-->640
                 g.drawImage(nextBlocks[lastBlock].getImage(), 0, oldYS, null);
                 break;
             case Block.EAST://slide EAST
-                int newXE = (int) (-640 * (1 - percentMoved));//-640-->0;
-                int oldXE = oldYS = (int) ((640) * percentMoved);//0-->640
+                int newXE = (int) (-frameSize * (1 - percentMoved));//-640-->0;
+                int oldXE = oldYS = (int) ((frameSize) * percentMoved);//0-->640
                 g.drawImage(currentBlock.getImage(), newXE, 0, null);
                 g.drawImage(nextBlocks[lastBlock].getImage(), oldXE, 0, null);
                 break;
             case Block.WEST://slide WEST
-                int newXW = (int) ((640) * (1 - percentMoved));//640-->0
-                int oldXW = (int) ((-640) * (percentMoved));//0-->-640
+                int newXW = (int) ((frameSize) * (1 - percentMoved));//640-->0
+                int oldXW = (int) ((-frameSize) * (percentMoved));//0-->-640
                 g.drawImage(currentBlock.getImage(), newXW, 0, null);
                 g.drawImage(nextBlocks[lastBlock].getImage(), oldXW, 0, null);
                 break;

@@ -4,6 +4,7 @@ import Engine.Engine;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Random;
 
 public class Block {
 
@@ -17,6 +18,7 @@ public class Block {
     public static final int SHOULDTRANSITION = 2;
 
     private Tile[][] tileMap;
+    private int seed;
 
     private Runnable blockGenerationRunnable = new Runnable() {
         @Override
@@ -27,6 +29,7 @@ public class Block {
 
     public Block(int seed) {
         tileMap = new Tile[Engine.numberOfSquares][Engine.numberOfSquares];
+        this.seed = seed;
         if(seed > 0) {
             new Thread(blockGenerationRunnable).start();
         }else{
@@ -54,9 +57,15 @@ public class Block {
     }
 
     private void generateBlock() {
+        Random r = new Random(seed);
         for (int z = 0; z < Engine.numberOfSquares; z++) {
             for (int v = 0; v < Engine.numberOfSquares; v++) {
-                tileMap[z][v] = new Tile(z, v, TileType.Type.PLAIN);
+                int type = r.nextInt(50);
+                if(type > 45){
+                    tileMap[z][v] = new Tile(z, v, TileType.Type.FOREST);
+                }else{
+                    tileMap[z][v] = new Tile(z, v, TileType.Type.PLAIN);
+                }
             }
         }
     }

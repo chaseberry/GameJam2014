@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
 
 
 public class Frame extends JFrame implements KeyListener {
@@ -24,13 +25,13 @@ public class Frame extends JFrame implements KeyListener {
     }
 
     public void refreshFrame() {
-
+        repaint();
     }
 
     @Override
     public void paint(Graphics graphics) {
-
-
+        BufferedImage img = engine.getGameImage();
+        graphics.drawImage(img, getInsets().left, getInsets().top, null);
     }
 
     //***KEY LISTENERS

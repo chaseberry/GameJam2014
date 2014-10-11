@@ -1,13 +1,20 @@
 package Mapping;
 
+import java.awt.image.BufferedImage;
+
 public class Tile {
 
     private int x;
     private int y;
     private TileType.Type type;
+    BufferedImage img;
 
     public Tile(int x, int y, TileType.Type type){
 
+    }
+
+    public BufferedImage getImage(){
+        return null;//TODO
     }
 
     public int getX() {

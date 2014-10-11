@@ -27,14 +27,20 @@ public class ElementFrame extends JPanel {
         elementButton.setLocation(0, 0);
         elementButton.setSize(32, 32);
         elementButton.addActionListener(elementListener);
+        elementButton.setName(element.getElementType());
         add(elementButton);
         JButton defuseButton = new JButton(new ImageIcon(ImageLoader.getImage("DifuseButtonImage.png", this)));
         defuseButton.setBorder(BorderFactory.createEmptyBorder());
         defuseButton.setLocation(100, 5);
         defuseButton.setSize(76, 24);
+        defuseButton.setName(element.getElementType());
         defuseButton.addActionListener(defuseListener);
         add(defuseButton);
         repaint();
+    }
+
+    public void setImage(BufferedImage img){
+        this.img = img;
     }
 
     @Override

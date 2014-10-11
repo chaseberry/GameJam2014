@@ -24,12 +24,13 @@ public class ElementalPouch {
     protected int elementCount = 0;
     private BufferedImage layerImage;
     private Element[] elementList;
-    private Element[] selectedElementList;
 
     //**UI stuff
     private ElementFrame[] elementFrames;
     private ElementalPouchFrame pouchFrame;
     //
+
+    private ActionListener[] listeners;
 
     public ElementalPouch() {
         this(5);
@@ -40,6 +41,14 @@ public class ElementalPouch {
         elementMap = new HashMap<String, Integer>();
         layerImage = ImageLoader.getImage("InventoryElementLayer.png", this);
         loadElements();
+    }
+
+    public void setActionListeners(ActionListener[] listeners){
+        this.listeners = listeners;
+    }
+
+    public boolean canPopElement(String name){
+        return elementMap.get(name) != null && elementMap.get(name) > 0;
     }
 
     private void loadElements() {
@@ -85,10 +94,20 @@ public class ElementalPouch {
                 int count = elementMap.get(element.getElementType()) == null ? 0 : elementMap.get(element.getElementType());
                 g.setFont(new Font(null, 0, 28));
                 g.drawString(String.valueOf(count), 45, 30);
-                elementFrames[z] = new ElementFrame(elementList[z], layerClone, null, null);
+                elementFrames[z] = new ElementFrame(elementList[z], layerClone, listeners[0], listeners[1]);
             }
         }else{
-            //Need a forloop forupdating BS;
+            for (int z = 0; z < elementList.length; z++) {
+                Element element = elementList[z];
+                BufferedImage layerClone = ImageLoader.copyImage(layerImage);
+                Graphics g = layerClone.getGraphics();
+                g.setColor(element.getElementColor());
+                g.fillRect(0, 0, Engine.imageSize, Engine.imageSize);
+                int count = elementMap.get(element.getElementType()) == null ? 0 : elementMap.get(element.getElementType());
+                g.setFont(new Font(null, 0, 28));
+                g.drawString(String.valueOf(count), 45, 30);
+                elementFrames[z].setImage(layerClone);
+            }
         }
         if(pouchFrame == null){
             pouchFrame = new ElementalPouchFrame(elementFrames);

@@ -11,10 +11,14 @@ public class Character {
     private double x;
     private double y;
     private Inventory inventory;
+    private int health;
+    private int mana;
 
     public Character() {
         x = 10;
         y = 10;
+        health = 3;
+        mana = 10;
         inventory = new Inventory();
     }
 
@@ -52,5 +56,13 @@ public class Character {
 
     public Inventory getInventory() {
         return inventory;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public int getMana() {
+        return mana;
     }
 }

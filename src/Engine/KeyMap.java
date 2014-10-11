@@ -7,11 +7,13 @@ public class KeyMap {
     public static final int LEFT = 37;
     public static final int DOWN = 40;
     public static final int RIGHT = 39;
+    public static final int MENUKEY = 69;
 
     private boolean up = false;
     private boolean left = false;
     private boolean down = false;
     private boolean right = false;
+    private boolean menu = false;
 
     public void keyPressed(int keyCode){
         switch(keyCode){
@@ -26,6 +28,9 @@ public class KeyMap {
                 break;
             case RIGHT:
                 right = true;
+                break;
+            case MENUKEY:
+                menu = true;
                 break;
         }
     }
@@ -44,6 +49,9 @@ public class KeyMap {
             case RIGHT:
                 right = false;
                 break;
+            case MENUKEY:
+                menu = false;
+                break;
         }
     }
 
@@ -61,6 +69,12 @@ public class KeyMap {
 
     public boolean isRightPressed(){
         return right;
+    }
+
+    public boolean isMenuPressed(){
+        boolean temp = menu;
+        menu = false;
+        return temp;
     }
 
 }

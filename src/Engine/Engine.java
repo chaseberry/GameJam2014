@@ -26,6 +26,8 @@ public class Engine {
     private int lastBlock = -1;
     private int animationCount = 0;
 
+    private boolean displayMenu = false;
+
     private TimerTask gameTimerTask = new TimerTask() {
         @Override
         public void run() {
@@ -50,17 +52,21 @@ public class Engine {
     }
 
     protected void gameTick() {
-        if (animationCount == 0) {
-            endTransition();
+        if(keyMap.isMenuPressed()){
+            displayMenu = !displayMenu;
         }
-        if (animationCount < 1) {
-            movePlayer();//Player movement
-            //AI movement
-            //Object movement
-        } else {
-            animationCount--;
+        if(!displayMenu) {
+            if (animationCount == 0) {
+                endTransition();
+            }
+            if (animationCount < 1) {
+                movePlayer();//Player movement
+                //AI movement
+                //Object movement
+            } else {
+                animationCount--;
+            }
         }
-
         frame.refreshFrame();//redraw
     }
 
@@ -152,6 +158,10 @@ public class Engine {
         BufferedImage gameImage = new BufferedImage(frameSize, frameSize, BufferedImage.TYPE_INT_ARGB);
         Graphics g = gameImage.getGraphics();
         g.clearRect(0, 0, frameSize, frameSize);
+        if(displayMenu){
+            return player.getInventory().getImage();
+        }
+
         if (animationCount == 0) {
             g.drawImage(currentBlock.getImage(), 0, 0, null);
             g.drawImage(player.getImage(), (int) (Engine.imageSize * player.getX()), (int) (Engine.imageSize * player.getY()), null);

@@ -2,6 +2,8 @@ package Elements;
 
 import Engine.ImageLoader;
 
+import java.awt.*;
+
 /**
  * Created by chase on 10/11/14.
  */
@@ -15,5 +17,10 @@ public class ShadowStone extends Element {
     @Override
     public String getElementType() {
         return "dark";
+    }
+
+    @Override
+    public Color getElementColor() {
+        return new Color(66, 15, 135);
     }
 }

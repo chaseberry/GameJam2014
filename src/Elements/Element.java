@@ -1,6 +1,7 @@
 package Elements;
 
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public abstract class Element {
@@ -39,6 +40,8 @@ public abstract class Element {
     }
 
     public abstract String getElementType();
+
+    public abstract Color getElementColor();
 
     public static Element getRandomElement(int x, int y){
         int element = (int) (Math.random() * 7);

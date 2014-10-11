@@ -51,7 +51,7 @@ public class Block {
             return SHOULDTRANSITION;
         }
 
-        Tile[] tiles = {tileMap[x][y], tileMap[x + 1][y], tileMap[x][y + 1], tileMap[x + 1][y + 1]};//recal based on direction
+        Tile[] tiles = {tileMap[x][y], tileMap[x + 1][y], tileMap[x][y + 1], tileMap[x + 1][y + 1]};//recalc based on direction
 
 
         if(Math.floor(newX) == newX){

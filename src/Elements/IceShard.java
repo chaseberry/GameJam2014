@@ -2,6 +2,8 @@ package Elements;
 
 import Engine.ImageLoader;
 
+import java.awt.*;
+
 /**
  * Created by chase on 10/11/14.
  */
@@ -15,5 +17,10 @@ public class IceShard extends Element {
     @Override
     public String getElementType() {
         return "water";
+    }
+
+    @Override
+    public Color getElementColor() {
+        return new Color(100, 220, 200);
     }
 }

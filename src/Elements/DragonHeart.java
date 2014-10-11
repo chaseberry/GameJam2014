@@ -11,4 +11,9 @@ public class DragonHeart extends Element {
         super(x, y, "Dragon Heart", "The fiery heart of a dragon.");
         img = ImageLoader.getImage("DragonHeart.png", this);
     }
+
+    @Override
+    public String getElementType() {
+        return "fire";
+    }
 }

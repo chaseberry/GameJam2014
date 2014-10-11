@@ -11,4 +11,9 @@ public class EntLeaf extends Element {
         super(x, y, "Ent Leaf", "A leaf fallen from a mighty Ent");
         img = ImageLoader.getImage("EntLeaf.png", this);
     }
+
+    @Override
+    public String getElementType() {
+        return "earth";
+    }
 }

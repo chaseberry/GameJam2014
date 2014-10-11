@@ -11,4 +11,9 @@ public class ChargedIron extends Element {
         super(x, y, "Charged Iron", "An electrifying chunk of iron");
         img = ImageLoader.getImage("ChargedIron.png", this);
     }
+
+    @Override
+    public String getElementType() {
+        return "electricity";
+    }
 }

@@ -17,6 +17,7 @@ public class Block {
     public static final int WILLCOLLIDE = 0;
     public static final int WILLNOTCOLLIDE = 1;
     public static final int SHOULDTRANSITION = 2;
+    public static final int COLLIDEWITHELEMENT = 3;
 
     private Tile[][] tileMap;
     private int seed;
@@ -43,16 +44,31 @@ public class Block {
         this((int) (Math.random() * 1000));
     }
 
-    public int willCollide(double newX, double newY) {
+    public int willCollide(double newX, double newY) {//TODO fix this
         int x = (int) newX, y = (int) newY;
-        if (Math.floor(newY) < 0 || (y + 1) > (Engine.numberOfSquares - 1) || Math.floor(newX) < 0 || (x + 1) > (Engine.numberOfSquares - 1)) {
+        if (Math.floor(newY) < 0 || (y + 1) > (Engine.numberOfSquares - 1)
+                || Math.floor(newX) < 0 || (x + 1) > (Engine.numberOfSquares - 1)) {
             return SHOULDTRANSITION;
         }
-        Tile[] tiles = {tileMap[x][y], tileMap[x + 1][y], tileMap[x][y + 1], tileMap[x + 1][y + 1]};
+
+        Tile[] tiles = {tileMap[x][y], tileMap[x + 1][y], tileMap[x][y + 1], tileMap[x + 1][y + 1]};//recal based on direction
+
+
+        if(Math.floor(newX) == newX){
+            tiles[1] = null;
+            tiles[3] = null;
+        }
+
+        if(Math.floor(newY) == newY){
+            tiles[2] = null;
+        }
 
         for (int z = 0; z < 4; z++) {
-            if (tiles[z].getType() == TileType.Type.FOREST) {
+            if (tiles[z] != null && tiles[z].getType() == TileType.Type.FOREST) {
                 return WILLCOLLIDE;
+            }
+            if(tiles[z] != null && blockElement!= null && blockElement.getX() == tiles[z].getX() && blockElement.getY() == tiles[z].getY()){
+                return COLLIDEWITHELEMENT;
             }
         }
         return WILLNOTCOLLIDE;
@@ -84,6 +100,9 @@ public class Block {
                 g.drawImage(tileMap[z][v].getImage(), Engine.imageSize * z, Engine.imageSize * v, null);
             }
         }
+        if(blockElement != null){
+            g.drawImage(blockElement.getImage(), Engine.imageSize * blockElement.getX(), Engine.imageSize * blockElement.getY(), null);
+        }
         return img;
     }
 
@@ -103,5 +122,13 @@ public class Block {
         }
         return -1;
     }
+
+    public Element takeBlockElement(){
+        Element temp = blockElement;
+        blockElement = null;
+        return temp;
+    }
+
+
 
 }

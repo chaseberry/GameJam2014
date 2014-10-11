@@ -11,4 +11,9 @@ public class IceShard extends Element {
         super(x, y, "Ice Shard", "A sharp chunk of ice.");
         img = ImageLoader.getImage("IceShard.png", this);
     }
+
+    @Override
+    public String getElementType() {
+        return "water";
+    }
 }

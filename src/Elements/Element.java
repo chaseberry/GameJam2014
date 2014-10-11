@@ -16,7 +16,10 @@ public abstract class Element {
     }
 
     public Element(int x, int y, String name, String description){
-
+        this.x = x;
+        this.y = y;
+        this.name = name;
+        this.description = description;
     }
 
     public int getX(){
@@ -34,6 +37,8 @@ public abstract class Element {
     public String getDescription(){
         return description;
     }
+
+    public abstract String getElementType();
 
     public static Element getRandomElement(int x, int y){
         int element = (int) (Math.random() * 7);

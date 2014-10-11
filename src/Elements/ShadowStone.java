@@ -11,4 +11,9 @@ public class ShadowStone extends Element {
         super(x, y, "Shadow Stone", "A stone imbued with dark secrets");
         img = ImageLoader.getImage("ShadowStone.png", this);
     }
+
+    @Override
+    public String getElementType() {
+        return "dark";
+    }
 }

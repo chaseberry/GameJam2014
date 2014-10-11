@@ -11,4 +11,9 @@ public class GlisteningCrystal extends Element {
         super(x, y, "Glistening Crystal", "A shining quartz crystal");
         img = ImageLoader.getImage("GlisteningCrystal.png", this);
     }
+
+    @Override
+    public String getElementType() {
+        return "light";
+    }
 }

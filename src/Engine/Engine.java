@@ -83,9 +83,15 @@ public class Engine {
             moveY /= 2;
         }
         int collision = currentBlock.willCollide(player.getX() + moveX, player.getY() + moveY);
-        if (collision == Block.WILLNOTCOLLIDE) {
+        if (collision == Block.WILLNOTCOLLIDE || collision == Block.COLLIDEWITHELEMENT) {
             player.moveX(moveX);
             player.moveY(moveY);
+        }
+
+        if (collision == Block.COLLIDEWITHELEMENT){
+            if(player.getInventory().getPouch().canHoldElement()){
+                player.getInventory().getPouch().addElement(currentBlock.takeBlockElement().getElementType());
+            }
         }
 
         if (collision == Block.SHOULDTRANSITION) {

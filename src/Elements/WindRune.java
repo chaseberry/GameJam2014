@@ -11,4 +11,9 @@ public class WindRune extends Element {
         super(x, y, "Wind Rune", "A rune that floats in the wind");
         img = ImageLoader.getImage("WindRune.png", this);
     }
+
+    @Override
+    public String getElementType() {
+        return "wind";
+    }
 }

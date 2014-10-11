@@ -1,5 +1,6 @@
 package Mapping;
 
+import Elements.Element;
 import Engine.Engine;
 
 import java.awt.*;
@@ -19,6 +20,7 @@ public class Block {
 
     private Tile[][] tileMap;
     private int seed;
+    private Element blockElement;
 
     private Runnable blockGenerationRunnable = new Runnable() {
         @Override
@@ -58,6 +60,9 @@ public class Block {
 
     private void generateBlock() {
         Random r = new Random(seed);
+        if(r.nextInt(10) < 12){
+            blockElement = Element.getRandomElement(r.nextInt(Engine.numberOfSquares), r.nextInt(Engine.numberOfSquares));
+        }
         for (int z = 0; z < Engine.numberOfSquares; z++) {
             for (int v = 0; v < Engine.numberOfSquares; v++) {
                 int type = r.nextInt(50);

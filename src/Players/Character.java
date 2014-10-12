@@ -1,8 +1,8 @@
 package Players;
 
 
-import Elements.Element;
 import Engine.Engine;
+import Engine.Entity;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,10 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
-public class Character {
+public class Character extends Entity {
 
-    private double x;
-    private double y;
     private Inventory inventory;
     private int health;
     private int mana;
@@ -63,8 +61,7 @@ public class Character {
     };
 
     public Character() {
-        x = 10;
-        y = 10;
+        super(10, 10);
         health = 3;
         mana = 10;
         inventory = new Inventory();
@@ -88,21 +85,6 @@ public class Character {
         y += distance;
     }
 
-    public double getX() {
-        return x;
-    }
-
-    public double getY() {
-        return y;
-    }
-
-    public void setY(double y) {
-        this.y = y;
-    }
-
-    public void setX(double x) {
-        this.x = x;
-    }
 
     public Inventory getInventory() {
         return inventory;
@@ -117,6 +99,11 @@ public class Character {
     }
 
     public void mouseClicked(int x, int y){
+
+    }
+
+    @Override
+    public void update() {
 
     }
 }

@@ -50,6 +50,7 @@ public class CraftingFrame extends JPanel {
                 elementButtons[z].addActionListener(removeItemListener);
                 elementButtons[z].setSize(Engine.imageSize, Engine.imageSize);
                 elementButtons[z].setName(element.getElementType());
+                elementButtons[z].setToolTipText(element.getName());
                 add(elementButtons[z]);
                 break;
             }

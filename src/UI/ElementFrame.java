@@ -26,7 +26,11 @@ public class ElementFrame extends JPanel {
         elementButton.setBorder(BorderFactory.createEmptyBorder());
         elementButton.setLocation(0, 0);
         elementButton.setSize(32, 32);
-        elementButton.setToolTipText(element.getName());
+        String toolTip = "<html><p style=\"text-align:center\">" + element.getName() + "</p>" +
+                "<br>" + element.getDescription()
+                +"<br>" + "Used to imbue spells with " +
+                 element.getElementType() + ".</html>";
+        elementButton.setToolTipText(toolTip);
         elementButton.addActionListener(elementListener);
         elementButton.setName(element.getElementType());
         add(elementButton);

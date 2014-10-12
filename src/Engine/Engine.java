@@ -23,7 +23,7 @@ public class Engine {
 
     private GameFrame gameFrame;
 
-    private final int maxAnimationMove = 25;
+    private final int maxAnimationMove = 12;
     public static final int imageSize = 32;
     public static final int numberOfSquares = 12;
 

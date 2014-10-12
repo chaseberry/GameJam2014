@@ -43,11 +43,11 @@ public class ElementalPouch {
         loadElements();
     }
 
-    public void setActionListeners(ActionListener[] listeners){
+    public void setActionListeners(ActionListener[] listeners) {
         this.listeners = listeners;
     }
 
-    public boolean canPopElement(String name){
+    public boolean canPopElement(String name) {
         return elementMap.get(name) != null && elementMap.get(name) > 0;
     }
 
@@ -83,7 +83,7 @@ public class ElementalPouch {
     }
 
     public JPanel getImage() {
-        if(elementFrames == null){
+        if (elementFrames == null) {
             elementFrames = new ElementFrame[7];
             for (int z = 0; z < elementList.length; z++) {
                 Element element = elementList[z];
@@ -96,7 +96,7 @@ public class ElementalPouch {
                 g.drawString(String.valueOf(count), 45, 30);
                 elementFrames[z] = new ElementFrame(elementList[z], layerClone, listeners[0], listeners[1]);
             }
-        }else{
+        } else {
             for (int z = 0; z < elementList.length; z++) {
                 Element element = elementList[z];
                 BufferedImage layerClone = ImageLoader.copyImage(layerImage);
@@ -109,12 +109,31 @@ public class ElementalPouch {
                 elementFrames[z].setImage(layerClone);
             }
         }
-        if(pouchFrame == null){
-            pouchFrame = new ElementalPouchFrame(elementFrames);
+        if (pouchFrame == null) {
+            pouchFrame = new ElementalPouchFrame(elementFrames, listeners[2]);
         }
 
 
         return pouchFrame;
+    }
+
+    public void addElementToFrame(String element) {
+        for (int z = 0; z < elementList.length; z++) {
+            if(element.equals(elementList[z].getElementType())){
+                pouchFrame.addElementToCraft(elementList[z]);
+            }
+        }
+    }
+
+    public void removeElementFromFrame(ActionEvent e){
+        pouchFrame.removeElementToCraft(e);
+    }
+
+    public void popElement(String element){
+        if (elementMap.get(element) != null) {
+            elementMap.put(element, elementMap.get(element) - 1);
+        }
+        elementCount--;
     }
 
     public boolean difuseElement(String element) {

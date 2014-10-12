@@ -1,17 +1,22 @@
 package UI;
 
+import Elements.Element;
 import Engine.Engine;
 import Players.ElementalPouch;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * Created by chase on 10/11/14.
  */
 public class ElementalPouchFrame extends JPanel {
 
-    public ElementalPouchFrame(ElementFrame[] elements){
+    private CraftingFrame craftingFrame;
+
+    public ElementalPouchFrame(ElementFrame[] elements, ActionListener removeItemListener){
         super();
         setBackground(new Color(255,255,255, 0));
         setLayout(null);
@@ -21,8 +26,18 @@ public class ElementalPouchFrame extends JPanel {
             elements[z].setLocation(0, (32 * z) + (5 * z));
             add(elements[z]);
         }
+
+        craftingFrame = new CraftingFrame(removeItemListener);
+        craftingFrame.setLocation(0, (32 * 7) + (5 * 7));
+        add(craftingFrame);
     }
 
+    public void addElementToCraft(Element element){
+        craftingFrame.addElement(element);
+    }
 
+    public void removeElementToCraft(ActionEvent e){
+        craftingFrame.removeElement(e);
+    }
 
 }

@@ -26,6 +26,7 @@ public class ElementFrame extends JPanel {
         elementButton.setBorder(BorderFactory.createEmptyBorder());
         elementButton.setLocation(0, 0);
         elementButton.setSize(32, 32);
+        elementButton.setToolTipText(element.getName());
         elementButton.addActionListener(elementListener);
         elementButton.setName(element.getElementType());
         add(elementButton);
@@ -33,6 +34,7 @@ public class ElementFrame extends JPanel {
         defuseButton.setBorder(BorderFactory.createEmptyBorder());
         defuseButton.setLocation(100, 5);
         defuseButton.setSize(76, 24);
+        defuseButton.setToolTipText("Defuse an element to gather mana");
         defuseButton.setName(element.getElementType());
         defuseButton.addActionListener(defuseListener);
         add(defuseButton);

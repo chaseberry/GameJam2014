@@ -1,6 +1,7 @@
 package Players;
 
 
+import Elements.Element;
 import Engine.Engine;
 
 import javax.swing.*;
@@ -43,7 +44,21 @@ public class Character {
             if(!getInventory().getPouch().canPopElement(element)){
                 return;
             }
+            getInventory().getPouch().addElementToFrame(element);
+            getInventory().getPouch().popElement(element);
+        }
+    };
 
+    ActionListener removeElementListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String element =  ((JButton)e.getSource()).getName();
+            if(getInventory().getPouch().canHoldElement()){
+                getInventory().getPouch().addElement(element);
+                getInventory().getPouch().removeElementFromFrame(e);
+            }else{
+                //your inventory is full. Please craft or defuse
+            }
         }
     };
 
@@ -53,7 +68,8 @@ public class Character {
         health = 3;
         mana = 10;
         inventory = new Inventory();
-        inventory.getPouch().setActionListeners(new ActionListener[]{selectElementListener, defuseButtonListener});
+        inventory.getPouch().setActionListeners(new ActionListener[]{selectElementListener,
+                defuseButtonListener, removeElementListener});
     }
 
     public BufferedImage getImage() {

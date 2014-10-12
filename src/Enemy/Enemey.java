@@ -3,7 +3,7 @@ package Enemy;
 
 import Engine.Entity;
 
-public class Enemey extends Entity {
+public abstract class Enemey extends Entity {
 
     private int health;
 

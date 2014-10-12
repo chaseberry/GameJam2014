@@ -3,19 +3,21 @@ package Engine.Spells;
 import Engine.Entity;
 import Mapping.Tile;
 
-/**
- * Created by chase on 10/11/14.
- */
-public class Spell {
+import java.awt.image.BufferedImage;
 
-    private int manaCost;
-    private int coolDown;
-    private int range;
-    private String name;
-    private String description;
-    private int damage;
-    private SpellType.Type spellType;
-    private Object target;//Tile or Entity
+
+public abstract class Spell {
+
+    protected int manaCost;
+    protected int coolDown;
+    protected double range;
+    protected String name;
+    protected String description;
+    protected SpellType.Type spellType;
+    protected Object target;//Tile or Entity
+    protected BufferedImage icon;
+    protected int level;
+    protected int id;
 
     public Tile getTileTarget() {
         if (target instanceof Tile) {
@@ -31,4 +33,73 @@ public class Spell {
         return null;
     }
 
+    public abstract void cast();
+
+    public int getManaCost() {
+        return manaCost;
+    }
+
+    public void setManaCost(int manaCost) {
+        this.manaCost = manaCost;
+    }
+
+    public int getCoolDown() {
+        return coolDown;
+    }
+
+    public void setCoolDown(int coolDown) {
+        this.coolDown = coolDown;
+    }
+
+    public double getRange() {
+        return range;
+    }
+
+    public void setRange(double range) {
+        this.range = range;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public SpellType.Type getSpellType() {
+        return spellType;
+    }
+
+    public void setSpellType(SpellType.Type spellType) {
+        this.spellType = spellType;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public BufferedImage getIcon() {
+        return icon;
+    }
+
+    public void setIcon(BufferedImage icon) {
+        this.icon = icon;
+    }
+
+    public int getId(){
+        return id;
+    }
 }

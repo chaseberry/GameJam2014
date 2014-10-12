@@ -56,6 +56,10 @@ public class Engine {
         gameTimer.scheduleAtFixedRate(gameTimerTask, 50, 50);//20fps
     }
 
+    private void loadSpells(){
+
+    }
+
     protected void gameTick() {
         if (keyMap.isMenuPressed()) {
             displayMenu = !displayMenu;

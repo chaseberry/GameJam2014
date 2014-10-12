@@ -6,6 +6,6 @@ package Players;
 public class SmallPouch extends ElementalPouch {
 
     public SmallPouch(){
-        super();
+        super(50);
     }
 }

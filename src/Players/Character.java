@@ -42,8 +42,9 @@ public class Character extends Entity {
             if(!getInventory().getPouch().canPopElement(element)){
                 return;
             }
-            getInventory().getPouch().addElementToFrame(element);
-            getInventory().getPouch().popElement(element);
+            if(getInventory().getPouch().addElementToFrame(element)) {
+                getInventory().getPouch().popElement(element);
+            }
         }
     };
 

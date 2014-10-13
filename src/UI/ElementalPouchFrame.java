@@ -32,8 +32,8 @@ public class ElementalPouchFrame extends JPanel {
         add(craftingFrame);
     }
 
-    public void addElementToCraft(Element element){
-        craftingFrame.addElement(element);
+    public boolean addElementToCraft(Element element){
+        return craftingFrame.addElement(element);
     }
 
     public void removeElementToCraft(ActionEvent e){

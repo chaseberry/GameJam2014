@@ -6,7 +6,7 @@ import Mapping.Tile;
 import java.awt.image.BufferedImage;
 
 
-public abstract class Spell {
+public abstract class Spell extends Entity {
 
     protected int manaCost;
     protected int coolDown;
@@ -18,6 +18,10 @@ public abstract class Spell {
     protected BufferedImage icon;
     protected int level;
     protected int id;
+
+    public Spell(double x, double y) {
+        super(x, y);
+    }
 
     public Tile getTileTarget() {
         if (target instanceof Tile) {

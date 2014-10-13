@@ -117,12 +117,13 @@ public class ElementalPouch {
         return pouchFrame;
     }
 
-    public void addElementToFrame(String element) {
+    public boolean addElementToFrame(String element) {
         for (int z = 0; z < elementList.length; z++) {
             if(element.equals(elementList[z].getElementType())){
-                pouchFrame.addElementToCraft(elementList[z]);
+               return pouchFrame.addElementToCraft(elementList[z]);
             }
         }
+        return false;
     }
 
     public void removeElementFromFrame(ActionEvent e){

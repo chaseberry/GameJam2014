@@ -28,9 +28,11 @@ public class SpellLoader {
             try {
                 String text = new String(Files.readAllBytes(Paths.get(f.toURI())), StandardCharsets.UTF_8);
                 JSONObject object = new JSONObject(text);
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+        return null;
     }
 }

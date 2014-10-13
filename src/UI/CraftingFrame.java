@@ -41,7 +41,8 @@ public class CraftingFrame extends JPanel {
         craftButton.addActionListener(listener);
     }
 
-    public void addElement(Element element) {
+    public boolean addElement(Element element) {
+        boolean added = false;
         for (int z = 0; z < elementButtons.length; z++) {
             if (elementButtons[z] == null) {
                 elementButtons[z] = new JButton(new ImageIcon(element.getImage()));
@@ -52,10 +53,12 @@ public class CraftingFrame extends JPanel {
                 elementButtons[z].setName(element.getElementType());
                 elementButtons[z].setToolTipText(element.getName());
                 add(elementButtons[z]);
+                added = true;
                 break;
             }
         }
         updateCraftButton();
+        return added;
     }
 
     public void removeElement(ActionEvent e){
